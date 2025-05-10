@@ -1,16 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    let task = document.getElementById('task-name')
+    let tasktext = document.getElementById('task-name')
     let add_btn = document.getElementById('add')
     let list = document.getElementById('list')
-    let tasks = JSON.parse(localStorage.getItem('tasks'))||[]
-    let task_name, items, eachtask, liElement, deleteElement
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || []
 
-     
 
+    
+    tasks.forEach((task) => display(task))
+    
+    //add new task
+    function addtask() {
+        localStorage.setItem("tasks", JSON.stringify(tasks))
+    }
 
     add_btn.addEventListener('click', () => {
-        task_name = task.value.trim()
+       const task_name = tasktext.value.trim()
         if (task_name == "") return
         const new_task = {
             id: Date.now(),
@@ -18,27 +23,40 @@ document.addEventListener('DOMContentLoaded', () => {
             completed: false
         }
         tasks.push(new_task)
+        display(new_task)
+        tasktext.value = ""
+
         addtask()
-        console.log(tasks)
-     
     })
 
-    function addtask() {
-        localStorage.setItem('tasks', JSON.stringify(tasks))
+ //display and remove tasks
+    function display(task) {
+        const  li = document.createElement("li");
+        li.setAttribute('id', task.id)
+        if (task.completed) li.classList.add("completed")
+        li.innerHTML = `
+            <span>${task.name}</span>             <button>delete</button>`
+
+        li.addEventListener('click', (e) => {
+            if (e.target.tagName === "BUTTON") return
+            task.completed = !task.completed
+            li.classList.toggle("completed")
+            addtask()
+        })
+
+        li.querySelector("button").addEventListener('click', (e) => {
+            e.stopPropagation()
+            tasks = tasks.filter(t => t.id !== task.id)
+            li.remove()
+            addtask()
+
+            
+            
+        })
+        list.appendChild(li)
     }
 
-    function display() {
-        tasks.forEach(task => {
-            liElement = document.createElement("li");
-            // deleteElement = document.createElement("button");
-            // deleteElement.textContent = "delete"
-            // deleteElement.setAttribute("class", "item")
-            liElement.textContent = task.name
-            // liElement.appendChild(deleteElement)
-            list.appendChild(liElement)
-            console.log(task)
-        });
-    }
-    display()
 
+    
 })
+
