@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function display(task) {
         const  li = document.createElement("li");
         li.setAttribute('id', task.id)
+
         if (task.completed) li.classList.add("completed")
         li.innerHTML = `
-            <span>${task.name}</span>             <button>delete</button>`
+            <span>${task.name}</span><button class="btn">delete</button>`
 
         li.addEventListener('click', (e) => {
             if (e.target.tagName === "BUTTON") return

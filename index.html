@@ -1,20 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./output.css" rel="stylesheet">
+    <link href="./src/output.css" rel="stylesheet">
     <title>Todo list</title>
+    <style>
+        span {
+            color: white;
+            font-size: 23px;
+            text-transform: capitalize;
+        }
+
+        .btn {
+            color: white;
+            background-color: rgb(255, 36, 36);
+            font-size: 22px;
+            text-transform: capitalize;
+            border-radius: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+
+        li {
+
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            margin-bottom: 7px;
+            margin-top: 7px;
+            margin-left: 60px;
+            margin-right: 60px;
+            background-color: rgba(137, 134, 141, 0.374);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .completed{
+            text-decoration:line-through;
+            color: white;
+        }
+    </style>
 </head>
-<body>
-    <div>
-        <div><input type="text" id="task-name" ></div>
-        <div><button id="add" class="bg-blue-800">add</button></div>
+
+<body class="bg-gray-800 text-center">
+    <div class="flex justify-center items-center min-h-96">
+        <div>
+            <div class="text-center capitalize font-bold text-3xl font-sans text-white">
+                <h2>todo-list</h2>
+            </div>
+            <div class="flex justify-center items-center mt-3.5">
+                <div><input type="text" id="task-name"
+                        class="border-[0.1px] border-white  w-xl h-14 focus:outline-none text-white pl-5 text-2xl">
+                </div>
+                <div><button id="add"
+                        class="bg-blue-800 text-white capitalize font-bold font-sans pt-[11.10px] pr-5 pl-5 pb-[11.10px] border-[0.1px] text-[22px]">add</button>
+                </div>
+            </div>
+            <div class="text-center" id="item">
+                <ul id="list" class="text-center">
+                </ul>
+            </div>
+        </div>
     </div>
-    <div>
-        <ul id="list">
-        </ul>
-    </div>
+<div class="text-white capitalize mt-72">made with &#x2661; abhiraj</div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
